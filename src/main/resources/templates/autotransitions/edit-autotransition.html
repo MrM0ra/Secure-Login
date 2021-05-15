@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="x-ua-compatible" content="ie=edge">
+		<title>Editar autotransicion</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet"
+			href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+			integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+			crossorigin="anonymous">
+		<link rel="stylesheet"
+			href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
+			integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
+			crossorigin="anonymous">
+		<link rel="stylesheet" href="../css/shards.min.css">
+	</head>
+	<body>
+		<style>	
+			body{
+				padding: 50px;
+				background: #34495e;
+			}
+			a, td, th, h2, label{
+				color: white;			
+			}
+		</style>
+		<div class="container my-5">
+			<h2 class="mb-5">Editar autotransicion</h2>
+			<div clas="row">
+				<div class="col-md-6">
+					<form action="#" th:action="@{/autotransitions/edit/{id}(id=${aut.autotranId})}" th:object="${aut}" method="post">
+						<div class="form-group col-md-6">
+							<input type="hidden" th:field="*{autotranId}" class="form-control" id="id" readonly> 
+							<span th:if="${#fields.hasErrors('autotranId')}" th:errors="*{autotranId}"></span>
+						</div> 
+						<div class="container my-2" id="wraper">
+							<div class="form-group col-md-6">
+								<label for="instInstId" class="col-form-label">Institucion</label>
+								<select	class="form-control-range" th:field="*{instInstId}">
+									<option th:each="ins : ${institutions}" th:value="${ins.instId}"
+										class="form-control" th:text="${ins.instName}" th:selected="${aut.instInstId=ins.instId}"></option>
+								</select>
+								<span th:if="${#fields.hasErrors('instInstId')}" th:errors="*{instInstId}" class="text-danger"></span>
+							</div>
+							<div class="form-group col-md-6">
+								<label for="eventstatus1" class="col-form-label">Estado Epidemiológico</label>
+								<select	class="form-control-range" th:field="*{eventstatus1}">
+									<option th:each="ev : ${eventStatuses}" th:value="${ev.evestatId}"
+										class="form-control" th:text="${ev.evestatName}" th:selected="${aut.eventstatus1=ev}"></option>
+								</select>
+								<span th:if="${#fields.hasErrors('eventstatus1')}" th:errors="*{eventstatus1}" class="text-danger"></span>
+							</div>
+							<div class="row" id="left">
+								<div class="form-group col-md-6">
+									<label for="autotranName" class="col-form-label">Nombre</label> 
+									<input type="text" th:field="*{autotranName}" class="form-control" id="autotranName" placeholder="Nombre de la autotransicion">
+									<span th:if="${#fields.hasErrors('autotranName')}" th:errors="*{autotranName}" class="text-danger"></span>
+								</div>
+								<div class="form-group col-md-6">
+									<label for="autotranIsactive" class="col-form-label">Activo</label>
+									<select	class="form-control-range" th:field="*{autotranIsactive}">
+										<option th:each="est : ${states}" th:value="${est}"
+											class="form-control" th:text="${est}" th:selected="${aut.autotranIsactive=est}"></option>
+									</select>
+									<span th:if="${#fields.hasErrors('eventstatus1')}" th:errors="*{eventstatus1}" class="text-danger"></span> 
+								</div>
+								<div class="form-group col-md-6">
+									<label for="autotranLogicaloperand" class="col-form-label">Operador logico</label>
+									<select	class="form-control-range" th:field="*{autotranLogicaloperand}">
+										<option th:each="log : ${logicals}" th:value="${log}"
+											class="form-control" th:text="${log}" th:selected="${aut.autotranLogicaloperand=log}"></option>
+									</select>
+									<span th:if="${#fields.hasErrors('autotranLogicaloperand')}" th:errors="*{autotranLogicaloperand}" class="text-danger"></span>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-4 mt-3">
+									<input type="submit" name="action" class="btn btn-primary" value="Guardar cambios">
+								</div>
+								<div class="col-md-3 mt-3">
+									<input type="submit" name="action" class="btn btn-secondary" value="Cancelar">
+								</div>
+							</div>	
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
