@@ -81,7 +81,7 @@
     			background: #2ecc71;
   			}
 		</style>
-		<form class="box" action="#" th:action="@{/login}" method="post">
+		<form class="box" action="./register.html" th:object="user" th:action="@{/login}" method="post">
 			<h1>Login</h1>
   			<div>
   				<input type="text" name="username" id="username" placeholder="Username">
@@ -92,7 +92,7 @@
   			<div>
   				<input type="submit" name="action" value="Login">
   			</div>
-  			<div style="color: white;"> Aún no tienes cuenta? <a href="/registration">Registrate</a></div>
+  			<div style="color: white;"> Aún no tienes cuenta? <a href="/sign-in">Registrate</a></div>
   			<div>
 	  			<span th:if="${param.error}" class="text-danger">
   					Usuario y/o contraseña invalidos.

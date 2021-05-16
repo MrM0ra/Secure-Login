@@ -1,8 +1,18 @@
 package cyber.security.proj.model;
 
 import java.io.Serializable;
-import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.SequenceGenerator;
 
 
 /**
@@ -14,6 +24,8 @@ import java.math.BigDecimal;
 public class Userr implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+	public interface AddUser{}
+	
 	@Id
 	@SequenceGenerator(name="USERR_USERID_GENERATOR", sequenceName="USERR_SEQ")
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="USERR_USERID_GENERATOR")
@@ -34,6 +46,8 @@ public class Userr implements Serializable {
 	@JoinColumn(name="PERS_PERS_ID")
 	private Person person;
 
+	private Date lastLog;
+	
 	public Userr() {
 	}
 
@@ -75,6 +89,14 @@ public class Userr implements Serializable {
 
 	public void setPerson(Person person) {
 		this.person = person;
+	}
+
+	public Date getLastLog() {
+		return lastLog;
+	}
+
+	public void setLastLog(Date lastLog) {
+		this.lastLog = lastLog;
 	}
 
 }
