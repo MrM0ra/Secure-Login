@@ -6,4 +6,4 @@ Functionalities as login history checking and password change are available for 
 
 Username querys, user deletion and regular user's blank passwords setting are the functionalities for the admin user type.
 
-Developed by Victor Mora, Fabian Portilla and Jean Ortiz
+Developed by Victor Mora, Jean Ortiz and Fabian Portilla
