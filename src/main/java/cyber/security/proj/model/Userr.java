@@ -3,6 +3,7 @@ package cyber.security.proj.model;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,7 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
-
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 /**
  * The persistent class for the USERR database table.
@@ -35,9 +37,13 @@ public class Userr implements Serializable {
 	private BigDecimal instInstId;
 
 	@Column(name="USER_NAME")
+	@NotBlank(message="Must not be a blank String", groups=AddUser.class)
+	@Size(min=6, max=20, groups=AddUser.class)
 	private String userName;
 
 	@Column(name="USER_PASSWORD")
+	@NotBlank(message="Must not be a blank String", groups=AddUser.class)
+	@Size(min=6, max=12, groups=AddUser.class)
 	private String userPassword;
 
 	//bi-directional many-to-one association to Person
