@@ -74,8 +74,8 @@ public class MainApplication implements CommandLineRunner {
 			roles1.add(pr1);
 			
 			Userr user1=new Userr();
-			user1.setUserName("admin");
-			user1.setUserPassword("{noop}admin");
+			user1.setUserName("admin12");
+			user1.setUserPassword("{noop}admin12");
 			user1.setPerson(per1);
 			
 			prolRep.save(pr1);
