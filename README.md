@@ -1,4 +1,5 @@
-# Secure-Login <img src="https://www.boardtrac.com.au/wp-content/uploads/secure-login-icon.jpg" alt="Welcome!" width="300"/>
+# Secure-Login
+<img src="https://ps.w.org/secure-ip-logins/assets/icon-256x256.png" alt="Welcome!" width="300"/>
 
 Secure login app to handle usernames and passwords for regular and admin users.
 
