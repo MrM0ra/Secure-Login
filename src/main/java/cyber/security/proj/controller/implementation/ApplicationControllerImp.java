@@ -27,38 +27,38 @@ import cyber.security.proj.repositories.RoleeRepository;
 import cyber.security.proj.services.UserrServiceImp;
 
 /**
- * Clase que maneja las rutas de la aplicacion
+ * Clase que maneja las rutas de la aplicación.
  * @author Victor
  */
 @Controller
 public class ApplicationControllerImp {
 
 	/*
-	 * Servicio para guardar, editar, borrar y consultar todos los usuarios de la aplicacion
+	 * Servicio para guardar, editar, borrar y consultar todos los usuarios de la aplicación.
 	 */
 	@Autowired
 	private UserrServiceImp uServ;
 	
 	/**
-	 * Repositorio para guardar, editar, borrar y consultar todas las personas de la aplicacion
+	 * Repositorio para guardar, editar, borrar y consultar todas las personas de la aplicación.
 	 */
 	@Autowired
 	private PersonRepository pRep;
 	
 	/**
-	 * Repositorio para guardar, editar, borrar y consultar todos los roles de la aplicacion
+	 * Repositorio para guardar, editar, borrar y consultar todos los roles de la aplicación.
 	 */
 	@Autowired
 	private RoleeRepository rRep;
 	
 	/**
-	 * Repositorio para guardar, editar, borrar y consultar todos los personas-rol de la aplicacion
+	 * Repositorio para guardar, editar, borrar y consultar todos los personas-rol de la aplicación.
 	 */
 	@Autowired
 	private PersonRoleRepository prolRep;
 	
 	/**
-	 * Ruta inicial del aplicativo web, planeando como implementar las diferentes vistas
+	 * Ruta inicial del aplicativo web, planeando como implementar las diferentes vistas.
 	 * @param model
 	 * @return : plantilla a renderizar
 	 */
@@ -69,18 +69,16 @@ public class ApplicationControllerImp {
 	}
 	
 	/**
-	 * Vista inicial del aplicativo web, inicio de sesion de usuarios
-	 * @param model
-	 * @return : plantilla a renderizar, login
+	 * Vista inicial del aplicativo web, inicio de sesion de usuarios.
+	 * @return : plantilla a renderizar, login.
 	 */
 	@GetMapping("/login")
-	public String login(Model model) {
-		model.addAttribute("user", new Userr());
+	public String login() {
 		return "login";
 	}
 	
 	/**
-	 * Metodo que muestra la pantalla para el registro de un usuario
+	 * Método que muestra la página para el registro de un usuario.
 	 * @param model : modelo al que se agregará un nuevo usuario en blanco.
 	 * @return Plantilla para que el usuario pueda agregar valores.
 	 */
@@ -91,12 +89,12 @@ public class ApplicationControllerImp {
 	}
 
 	/**
-	 * Metodo que recibe el usuario y contraseña suministrados por el usuario. 
-	 * @param user : el objeto usuario que viene en la plantilla con el usuario y contraseña
-	 * @param result : objeto que valida si en los campos del usuario hay alguna irregularidad
-	 * @param model : modelo del que se obtiene el objeto user
-	 * @return Plantilla de inicio de sesion : si no hay errores en los datos ingresados por el usuario
-	 * 			Plantilla de registro : si hay algun error en los datos ingresados por el usuario  
+	 * Método que recibe el usuario y contraseña suministrados por el usuario. 
+	 * @param user : el objeto usuario que viene en la plantilla con el usuario y contraseña.
+	 * @param result : objeto que valida si en los campos del usuario hay alguna irregularidad.
+	 * @param model : modelo del que se obtiene el objeto user.
+	 * @return Plantilla de inicio de sesión : si no hay errores en los datos ingresados por el usuario.
+	 * 			Plantilla de registro : si hay algun error en los datos ingresados por el usuario.
 	 */
 	@PostMapping("/sign-in")
 	public String signIn(@Validated({AddUser.class}) @ModelAttribute("user")Userr user, BindingResult result, 
@@ -144,15 +142,25 @@ public class ApplicationControllerImp {
 	}
 	
 	/**
-	 * Metodo que muestra una pantalla de acceso denegado si el usuario intenta acceder a una pagina a la que no tiene permiso
-	 * @param model : modelo 
-	 * @return : plantilla de acceso denegado
+	 * Método que muestra una página con todos los usuarios de rol "Regular" que existen en el sistema.
+	 * @param model.
+	 * @return Página con un listado de todos los usuarios del sistema.
+	 */
+	@PreAuthorize("hasRole('Administrador')")
+	@GetMapping("/users/")
+	public String showUsers(Model model) {
+		model.addAttribute("users", uServ.findAll());
+		return "users";
+	}
+	
+	/**
+	 * Método que muestra una página de acceso denegado si el usuario intenta acceder a una ruta a la que no tiene permiso.
+	 * @param model : modelo.
+	 * @return : plantilla de acceso denegado.
 	 */
 	@GetMapping("/access-denied")
 	public String accesDenied(Model model) {
 		return "denied";
 	}
-
-	
 	
 }

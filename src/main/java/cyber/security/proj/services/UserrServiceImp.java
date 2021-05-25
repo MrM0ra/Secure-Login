@@ -37,6 +37,11 @@ public class UserrServiceImp implements UserrServiceIntf {
 		return userRep.findByUserName(userName);
 	}
 	
+	@Override
+	public Iterable<Userr> findAll(){
+		return userRep.findAll();
+	}
+	
 	@Transactional
 	public Optional<Userr> editUser(Userr user){
 		userRep.save(user);

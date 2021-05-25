@@ -8,5 +8,6 @@ public interface UserrServiceIntf {
 
 	public Optional<Userr> saveUserr(Userr usr);
 	public Optional<Userr> findUserr(Userr usr);
+	public Iterable<Userr> findAll();
 	
 }
