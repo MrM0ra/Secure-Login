@@ -1,18 +1,18 @@
 package cyber.security.proj.controller.implementation;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import cyber.security.proj.model.Person;
@@ -129,10 +129,10 @@ public class ApplicationControllerImp {
 			uServ.saveUserr(user);
 			
 			Userr userEd2=new Userr();
-			userEd2.setUserId(uServ.findUserr(user).get().getUserId());
-			userEd2.setPerson(uServ.findUserr(user).get().getPerson());
-			userEd2.setUserName(uServ.findUserr(user).get().getUserName());
-			userEd2.setUserPassword(uServ.findUserr(user).get().getUserPassword());
+			userEd2.setUserId(uServ.findUserr(user.getUserId()).get().getUserId());
+			userEd2.setPerson(uServ.findUserr(user.getUserId()).get().getPerson());
+			userEd2.setUserName(uServ.findUserr(user.getUserId()).get().getUserName());
+			userEd2.setUserPassword(uServ.findUserr(user.getUserId()).get().getUserPassword());
 			userEd2.getPerson().setPersonRoles(roles);
 			
 			uServ.editUser(userEd2);
@@ -151,6 +151,33 @@ public class ApplicationControllerImp {
 	public String showUsers(Model model) {
 		model.addAttribute("users", uServ.findAll());
 		return "users";
+	}
+	
+	/**
+	 * Método que setea en blanco la contraseña de un usuario dado su id.
+	 * @param id : id del usuario del cual se quiere poner la contraseña en blanco.
+	 * @param model : modelo del que se recupera el id dado del usuario.
+	 * @return : Plantilla de usuarios si no hay ningun error con el id dado.
+	 * 		IllegalArgumentException si hay error con el id dado.
+	 */
+	@SuppressWarnings("finally")
+	@PreAuthorize("hasRole('Administrador')")
+	@GetMapping("/autotransitions/edit/{id}")
+	public String blankPwd(@PathVariable("id") long id, Model model) {
+		try {
+			Optional<Userr> u = uServ.findUserr(id);
+			if(u.isEmpty()) {
+				throw new IllegalArgumentException("Invalid Autotransition Id:" + id);
+			}else {
+				u.get().setUserPassword(" ");
+				uServ.editUser(u.get());
+				return "users";
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			return "users";
+		}
 	}
 	
 	/**

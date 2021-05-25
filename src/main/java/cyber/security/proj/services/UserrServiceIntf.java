@@ -7,7 +7,7 @@ import cyber.security.proj.model.Userr;
 public interface UserrServiceIntf {
 
 	public Optional<Userr> saveUserr(Userr usr);
-	public Optional<Userr> findUserr(Userr usr);
+	public Optional<Userr> findUserr(long id);
 	public Iterable<Userr> findAll();
 	
 }

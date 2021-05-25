@@ -29,8 +29,8 @@ public class UserrServiceImp implements UserrServiceIntf {
 
 	@Override
 	@Transactional
-	public Optional<Userr> findUserr(Userr usr) {
-		return userRep.findById(usr.getUserId());
+	public Optional<Userr> findUserr(long id) {
+		return userRep.findById(id);
 	}
 
 	public List<Userr> findByUserName(String userName){
