@@ -1,5 +1,5 @@
 # Secure-Login
-<img src="https://ps.w.org/secure-ip-logins/assets/icon-256x256.png" alt="Welcome!" width="200" height="200"/>
+<img src="https://ps.w.org/secure-ip-logins/assets/icon-256x256.png" alt="Welcome!" width="50" height="50"/>
 
 Secure login app to handle usernames and passwords for regular and admin users.
 
