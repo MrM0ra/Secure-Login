@@ -19,12 +19,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity httpSecurity) throws Exception {
 		httpSecurity.cors().and().csrf().disable().authorizeRequests()
-		.antMatchers("/triggers/", "/trigger-types/", "/autotransitions/", "/user-selections/", "/view/**")
-		.permitAll()
-		.antMatchers("/trigger-types/**")
+		.antMatchers("/users/**")
 				.hasRole("Administrador")
-				.antMatchers("/autotransitions/**", "/user-selections/**", "/triggers/**")
-				.hasRole("Operador")
+				.antMatchers("/last-log/**", "/pwd-change/**")
+				.hasRole("Regular")
 				.antMatchers("/login", "/").authenticated().anyRequest().permitAll().and()
 				.formLogin().usernameParameter("username").passwordParameter("password")
 				.loginPage("/login").permitAll().and().logout()

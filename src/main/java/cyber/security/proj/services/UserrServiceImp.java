@@ -26,6 +26,12 @@ public class UserrServiceImp implements UserrServiceIntf {
 		userRep.save(usr);
 		return userRep.findById(usr.getUserId());
 	}
+	
+	@Override
+	@Transactional
+	public void deleteUser(Userr user) {
+		userRep.delete(user);
+	}
 
 	@Override
 	@Transactional

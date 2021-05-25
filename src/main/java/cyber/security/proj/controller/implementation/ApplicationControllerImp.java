@@ -162,15 +162,16 @@ public class ApplicationControllerImp {
 	 */
 	@SuppressWarnings("finally")
 	@PreAuthorize("hasRole('Administrador')")
-	@GetMapping("/autotransitions/edit/{id}")
+	@GetMapping("/users/blank-pwd/{id}")
 	public String blankPwd(@PathVariable("id") long id, Model model) {
 		try {
 			Optional<Userr> u = uServ.findUserr(id);
 			if(u.isEmpty()) {
 				throw new IllegalArgumentException("Invalid Autotransition Id:" + id);
 			}else {
-				u.get().setUserPassword(" ");
+				u.get().setUserPassword("{noop} ");
 				uServ.editUser(u.get());
+				model.addAttribute("users", uServ.findAll());
 				return "users";
 			}
 		}catch (Exception e) {
@@ -178,6 +179,25 @@ public class ApplicationControllerImp {
 		}finally {
 			return "users";
 		}
+	}
+	
+	
+	@PreAuthorize("hasRole('Administrador')")
+	@GetMapping("/users/delete/{id}")
+	public String deleteUser(@PathVariable("id") long id, Model model) {
+		try {
+			Optional<Userr> u = uServ.findUserr(id);
+			if(u.isEmpty()) {
+				throw new IllegalArgumentException("Invalid Autotransition Id:" + id);
+			}else {
+				uServ.deleteUser(u.get());
+				model.addAttribute("users", uServ.findAll());
+				return "users";
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return "";
 	}
 	
 	/**
