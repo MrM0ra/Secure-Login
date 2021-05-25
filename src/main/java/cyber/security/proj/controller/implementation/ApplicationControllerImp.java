@@ -221,8 +221,9 @@ public class ApplicationControllerImp {
 	public String pwdChange(Model model) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String  usrName = auth.getPrincipal().toString().split("; ")[0].split(": ")[2];
-		model.addAttribute("user", uServ.findByUserName(usrName).get(0));
-		System.out.println(uServ.findByUserName(usrName).get(0).getLastLog().toString());
+		Userr u = uServ.findByUserName(usrName).get(0);
+		u.setUserPassword(u.getUserPassword().split("}")[1]);
+		model.addAttribute("user", u);
 		return "pwd-change";
 	}
 	
@@ -232,7 +233,11 @@ public class ApplicationControllerImp {
 		if(result.hasErrors()) {
 			return "pwd-change";
 		}else {
-			uServ.editUser(user);
+			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+			String  usrName = auth.getPrincipal().toString().split("; ")[0].split(": ")[2];
+			Userr u = uServ.findByUserName(usrName).get(0);
+			u.setUserPassword("{noop}"+user.getUserPassword());
+			uServ.editUser(u);
 		}
 		return "index";
 	}
