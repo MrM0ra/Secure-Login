@@ -164,20 +164,24 @@ public class ApplicationControllerImp {
 	@PreAuthorize("hasRole('Administrador')")
 	@GetMapping("/users/blank-pwd/{id}")
 	public String blankPwd(@PathVariable("id") long id, Model model) {
-		try {
-			Optional<Userr> u = uServ.findUserr(id);
-			if(u.isEmpty()) {
-				throw new IllegalArgumentException("Invalid Autotransition Id:" + id);
-			}else {
-				u.get().setUserPassword("{noop} ");
-				uServ.editUser(u.get());
-				model.addAttribute("users", uServ.findAll());
+		if(id==1) {
+			throw new IllegalArgumentException("Invalid Autotransition Id:" + id);
+		}else {
+			try {
+				Optional<Userr> u = uServ.findUserr(id);
+				if(u.isEmpty()) {
+					throw new IllegalArgumentException("Invalid Autotransition Id:" + id);
+				}else {
+					u.get().setUserPassword("{noop} ");
+					uServ.editUser(u.get());
+					model.addAttribute("users", uServ.findAll());
+					return "users";
+				}
+			}catch (Exception e) {
+				e.printStackTrace();
+			}finally {
 				return "users";
 			}
-		}catch (Exception e) {
-			e.printStackTrace();
-		}finally {
-			return "users";
 		}
 	}
 	
@@ -185,19 +189,23 @@ public class ApplicationControllerImp {
 	@PreAuthorize("hasRole('Administrador')")
 	@GetMapping("/users/delete/{id}")
 	public String deleteUser(@PathVariable("id") long id, Model model) {
-		try {
-			Optional<Userr> u = uServ.findUserr(id);
-			if(u.isEmpty()) {
-				throw new IllegalArgumentException("Invalid Autotransition Id:" + id);
-			}else {
-				uServ.deleteUser(u.get());
-				model.addAttribute("users", uServ.findAll());
-				return "users";
+		if(id==1) {
+			throw new IllegalArgumentException("Invalid Autotransition Id:" + id);
+		}else {
+			try {
+				Optional<Userr> u = uServ.findUserr(id);
+				if(u.isEmpty()) {
+					throw new IllegalArgumentException("Invalid Autotransition Id:" + id);
+				}else {
+					uServ.deleteUser(u.get());
+					model.addAttribute("users", uServ.findAll());
+					return "users";
+				}
+			}catch(Exception e) {
+				e.printStackTrace();
 			}
-		}catch(Exception e) {
-			e.printStackTrace();
+			return "redirect:/users/";
 		}
-		return "";
 	}
 	
 	/**

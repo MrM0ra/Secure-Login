@@ -39,12 +39,12 @@
 							</thead>
 							<tbody>
 								<tr th:each="user : ${users}">
-									<td th:text="${user.userName}"></td>
+									<td th:unless="${user.userName == 'admin'}" th:text="${user.userName}"></td>
 									<td>
-										<a th:href="@{/users/blank-pwd/{id}(id=${user.userId})}"class="btn btn-primary">Poner Contraseña en Blanco</a>
+										<a th:unless="${user.userName == 'admin'}" th:href="@{/users/blank-pwd/{id}(id=${user.userId})}" class="btn btn-primary">Poner Contraseña en Blanco</a>
 									</td>
 									<td>
-										<a th:href="@{/users/delete/{id}(id=${user.userId})}" class="btn btn-primary">Eliminar Usuario</a>
+										<a th:unless="${user.userName == 'admin'}" th:href="@{/users/delete/{id}(id=${user.userId})}" class="btn btn-primary">Eliminar Usuario</a>
 									</td>
 								</tr>
 							</tbody>
