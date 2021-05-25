@@ -101,8 +101,7 @@ public class ApplicationControllerImp {
 	 * 			Plantilla de registro : si hay algun error en los datos ingresados por el usuario.
 	 */
 	@PostMapping("/sign-in")
-	public String signIn(@Validated({AddUser.class}) @ModelAttribute("user")Userr user, BindingResult result, 
-			Model model) {
+	public String signIn(@Validated({AddUser.class}) @ModelAttribute("user")Userr user, BindingResult result, Model model) {
 		if(result.hasErrors()) {
 			return "register";
 		}else {

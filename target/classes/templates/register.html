@@ -81,14 +81,15 @@
     			background: #3c415c;
   			}
 		</style>
-		<!-- ./index-login.html -->
 		<form class="box" action="#" th:action="@{/sign-in}" th:object="${user}" method="post">
 			<h1>Registro</h1>
   			<div>
   				<input type="text" th:field="*{userName}" name="userName" id="userName" placeholder="Username">
+  				<span th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}" class="text-danger"></span>
   			</div>
   			<div>
-				<input type="password" th:field="*{userPassword}" name="userPassword" id="userPassword" placeholder="Password">  
+				<input type="password" th:field="*{userPassword}" name="userPassword" id="userPassword" placeholder="Password">
+				<span th:if="${#fields.hasErrors('userPassword')}" th:errors="*{userPassword}" class="text-danger"></span>  
   			</div>
   			<div>
   				<input type="submit" name="action" value="Sign in">
