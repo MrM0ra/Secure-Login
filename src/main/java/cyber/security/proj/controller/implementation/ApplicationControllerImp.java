@@ -1,11 +1,15 @@
 package cyber.security.proj.controller.implementation;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -75,6 +79,11 @@ public class ApplicationControllerImp {
 	@GetMapping("/login")
 	public String login() {
 		return "login";
+	}
+	
+	@PostMapping("/login/")
+	public String loginPost() {
+		return "index";
 	}
 	
 	/**
@@ -204,8 +213,28 @@ public class ApplicationControllerImp {
 			}catch(Exception e) {
 				e.printStackTrace();
 			}
-			return "redirect:/users/";
+			return "";
 		}
+	}
+	
+	@GetMapping("/pwd-change/")
+	public String pwdChange(Model model) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String  usrName = auth.getPrincipal().toString().split("; ")[0].split(": ")[2];
+		model.addAttribute("user", uServ.findByUserName(usrName).get(0));
+		System.out.println(uServ.findByUserName(usrName).get(0).getLastLog().toString());
+		return "pwd-change";
+	}
+	
+	@PostMapping("/pwd-change/")
+	public String pwdChangePost(@Validated({AddUser.class}) @ModelAttribute("user")Userr user, BindingResult result, 
+			Model model) {
+		if(result.hasErrors()) {
+			return "pwd-change";
+		}else {
+			uServ.editUser(user);
+		}
+		return "index";
 	}
 	
 	/**

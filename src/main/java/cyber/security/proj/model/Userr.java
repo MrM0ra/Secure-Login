@@ -47,6 +47,8 @@ public class Userr implements Serializable {
 
 	private LocalDateTime lastLog;
 	
+	private LocalDateTime lastLastLog;
+	
 	public Userr() {
 	}
 
@@ -98,4 +100,12 @@ public class Userr implements Serializable {
 		this.lastLog = lastLog;
 	}
 
+	public LocalDateTime  getLastLastLog() {
+		return lastLastLog;
+	}
+
+	public void setLastLastLog(LocalDateTime lastLastLog) {
+		this.lastLastLog = lastLastLog;
+	}
+	
 }

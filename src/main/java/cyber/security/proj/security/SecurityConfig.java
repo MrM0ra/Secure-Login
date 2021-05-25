@@ -18,10 +18,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity httpSecurity) throws Exception {
-		httpSecurity.cors().and().csrf().disable().authorizeRequests()
+		httpSecurity.cors().and().csrf().disable().authorizeRequests().antMatchers("/pwd-change/**").permitAll()
 		.antMatchers("/users/**")
 				.hasRole("Administrador")
-				.antMatchers("/last-log/**", "/pwd-change/**")
+				.antMatchers("/last-log/**")
 				.hasRole("Regular")
 				.antMatchers("/login", "/").authenticated().anyRequest().permitAll().and()
 				.formLogin().usernameParameter("username").passwordParameter("password")
