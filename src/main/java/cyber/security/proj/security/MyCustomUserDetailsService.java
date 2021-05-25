@@ -3,6 +3,8 @@ package cyber.security.proj.security;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -15,13 +17,9 @@ import cyber.security.proj.repositories.UserrRepository;
 @Service
 public class MyCustomUserDetailsService implements UserDetailsService {
 	
+	@Autowired
 	private UserrRepository userRep;
 	
-	@Autowired
-	public MyCustomUserDetailsService(UserrRepository userRep) {
-		this.userRep = userRep;
-	}
-
 	@Override
 	@Transactional
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

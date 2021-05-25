@@ -1,5 +1,6 @@
 package cyber.security.proj.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,6 @@ import cyber.security.proj.repositories.UserrRepository;
 public class UserrServiceImp implements UserrServiceIntf {
 
 	private UserrRepository userRep;
-	
 	
 	@Autowired
 	public UserrServiceImp(UserrRepository userRep) {
@@ -33,6 +33,10 @@ public class UserrServiceImp implements UserrServiceIntf {
 		return userRep.findById(usr.getUserId());
 	}
 
+	public List<Userr> findByUserName(String userName){
+		return userRep.findByUserName(userName);
+	}
+	
 	@Transactional
 	public Optional<Userr> editUser(Userr user){
 		userRep.save(user);

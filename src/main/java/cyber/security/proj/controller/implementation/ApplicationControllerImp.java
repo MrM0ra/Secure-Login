@@ -1,10 +1,12 @@
 package cyber.security.proj.controller.implementation;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -27,6 +29,10 @@ import cyber.security.proj.services.UserrServiceImp;
 @Controller
 public class ApplicationControllerImp {
 
+//	@Autowired
+//	@Qualifier("sessionRegistry")
+//	private SessionRegistry sessionRegistry;
+//	
 	@Autowired
 	private UserrServiceImp uServ;
 	
@@ -58,12 +64,7 @@ public class ApplicationControllerImp {
 	@GetMapping("/login")
 	public String login(Model model) {
 		model.addAttribute("user", new Userr());
-		return "index-login";
-	}
-	
-	@PostMapping("/login")
-	public String login() {
-		return "";
+		return "login";
 	}
 	
 	@GetMapping("/sign-in")
@@ -114,7 +115,7 @@ public class ApplicationControllerImp {
 			uServ.editUser(userEd2);
 			
 		}
-		return "index-login";
+		return "redirect:/login/";
 	}
 	
 	@GetMapping("/access-denied")

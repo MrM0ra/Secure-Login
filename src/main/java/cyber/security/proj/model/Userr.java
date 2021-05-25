@@ -2,8 +2,7 @@ package cyber.security.proj.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Date;
-
+import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -46,7 +45,7 @@ public class Userr implements Serializable {
 	@JoinColumn(name="PERS_PERS_ID")
 	private Person person;
 
-	private Date lastLog;
+	private LocalDateTime lastLog;
 	
 	public Userr() {
 	}
@@ -91,11 +90,11 @@ public class Userr implements Serializable {
 		this.person = person;
 	}
 
-	public Date getLastLog() {
+	public LocalDateTime  getLastLog() {
 		return lastLog;
 	}
 
-	public void setLastLog(Date lastLog) {
+	public void setLastLog(LocalDateTime lastLog) {
 		this.lastLog = lastLog;
 	}
 
