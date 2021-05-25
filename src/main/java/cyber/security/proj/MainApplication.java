@@ -95,7 +95,7 @@ public class MainApplication implements CommandLineRunner {
 			List<PersonRole> roles2=new ArrayList<>();
 			
 			Rolee rol2=new Rolee();
-			rol2.setRoleName("Operador");
+			rol2.setRoleName("Regular");
 			
 			rRep.save(rol2);
 			pRep.save(p2);

@@ -18,16 +18,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity httpSecurity) throws Exception {
-		httpSecurity.cors().and().csrf().disable().authorizeRequests().antMatchers("/pwd-change/**").permitAll()
+		httpSecurity.cors().and().csrf().disable().authorizeRequests().antMatchers("/pwd-change/**", "/last-log/**").permitAll()
 		.antMatchers("/users/**")
-				.hasRole("Administrador")
-				.antMatchers("/last-log/**")
-				.hasRole("Regular")
-				.antMatchers("/login", "/").authenticated().anyRequest().permitAll().and()
-				.formLogin().usernameParameter("username").passwordParameter("password")
-				.loginPage("/login").permitAll().and().logout()
-				.invalidateHttpSession(true).clearAuthentication(true)
-				.logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login?logout")
-				.permitAll().and().exceptionHandling().accessDeniedHandler(accessDeniedHandler);
+			.hasRole("Administrador")
+			.antMatchers("/login", "/").authenticated().anyRequest().permitAll().and()
+			.formLogin().usernameParameter("username").passwordParameter("password")
+			.loginPage("/login").permitAll().and().logout()
+			.invalidateHttpSession(true).clearAuthentication(true)
+			.logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login?logout")
+			.permitAll().and().exceptionHandling().accessDeniedHandler(accessDeniedHandler);
 	}
 }

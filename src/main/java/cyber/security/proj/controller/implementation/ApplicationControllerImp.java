@@ -1,8 +1,6 @@
 package cyber.security.proj.controller.implementation;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,6 +16,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import cyber.security.proj.model.Person;
 import cyber.security.proj.model.PersonRole;
@@ -67,7 +67,7 @@ public class ApplicationControllerImp {
 	 * @return : plantilla a renderizar
 	 */
 	@PreAuthorize("hasRole('Administrador'||'Regular')")
-	@GetMapping("/")
+	@RequestMapping(value="/", method= {RequestMethod.GET, RequestMethod.POST})
 	public String index(Model model) {
 		return "index";
 	}
@@ -76,14 +76,9 @@ public class ApplicationControllerImp {
 	 * Vista inicial del aplicativo web, inicio de sesion de usuarios.
 	 * @return : plantilla a renderizar, login.
 	 */
-	@GetMapping("/login")
+	@RequestMapping(value="/login", method= {RequestMethod.GET, RequestMethod.POST})
 	public String login() {
 		return "login";
-	}
-	
-	@PostMapping("/login/")
-	public String loginPost() {
-		return "index";
 	}
 	
 	/**
@@ -240,6 +235,19 @@ public class ApplicationControllerImp {
 			uServ.editUser(u);
 		}
 		return "index";
+	}
+	
+	/**
+	 * Método que muestra una página con la información de losúltimos dos inicios de sesión del usuario actual.
+	 * @param model : Modelo al cual se cargará la información del usuario actual.
+	 * @return : Página que muestra los dos últimos inicios de sesión del usuario actual.
+	 */
+	@GetMapping("/last-log/")
+	public String lastLogin(Model model) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String  usrName = auth.getPrincipal().toString().split("; ")[0].split(": ")[2];
+		model.addAttribute("user", uServ.findByUserName(usrName).get(0));
+		return "last-login";
 	}
 	
 	/**
