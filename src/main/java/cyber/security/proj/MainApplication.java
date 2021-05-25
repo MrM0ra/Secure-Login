@@ -82,10 +82,10 @@ public class MainApplication implements CommandLineRunner {
 			uService.saveUserr(user1);			
 
 			Userr userEd=new Userr();
-			userEd.setUserId(uService.findUserr(user1).get().getUserId());
-			userEd.setPerson(uService.findUserr(user1).get().getPerson());
-			userEd.setUserName(uService.findUserr(user1).get().getUserName());
-			userEd.setUserPassword(uService.findUserr(user1).get().getUserPassword());
+			userEd.setUserId(uService.findUserr(user1.getUserId()).get().getUserId());
+			userEd.setPerson(uService.findUserr(user1.getUserId()).get().getPerson());
+			userEd.setUserName(uService.findUserr(user1.getUserId()).get().getUserName());
+			userEd.setUserPassword(uService.findUserr(user1.getUserId()).get().getUserPassword());
 			userEd.getPerson().setPersonRoles(roles1);
 			
 			uService.editUser(userEd);
@@ -112,18 +112,18 @@ public class MainApplication implements CommandLineRunner {
 			roles2.add(pr2);
 
 			Userr user2=new Userr();
-			user2.setUserName("usuario-operador");
-			user2.setUserPassword("{noop}contraseña345");
+			user2.setUserName("regular");
+			user2.setUserPassword("{noop}regular");
 			user2.setPerson(p2);
 			
 			prolRep.save(pr2);
 			uService.saveUserr(user2);
 			
 			Userr userEd2=new Userr();
-			userEd2.setUserId(uService.findUserr(user2).get().getUserId());
-			userEd2.setPerson(uService.findUserr(user2).get().getPerson());
-			userEd2.setUserName(uService.findUserr(user2).get().getUserName());
-			userEd2.setUserPassword(uService.findUserr(user2).get().getUserPassword());
+			userEd2.setUserId(uService.findUserr(user2.getUserId()).get().getUserId());
+			userEd2.setPerson(uService.findUserr(user2.getUserId()).get().getPerson());
+			userEd2.setUserName(uService.findUserr(user2.getUserId()).get().getUserName());
+			userEd2.setUserPassword(uService.findUserr(user2.getUserId()).get().getUserPassword());
 			userEd2.getPerson().setPersonRoles(roles2);
 			
 			uService.editUser(userEd2);
