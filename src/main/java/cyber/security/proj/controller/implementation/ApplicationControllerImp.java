@@ -26,22 +26,34 @@ import cyber.security.proj.repositories.PersonRoleRepository;
 import cyber.security.proj.repositories.RoleeRepository;
 import cyber.security.proj.services.UserrServiceImp;
 
+/**
+ * Clase que maneja las rutas de la aplicacion
+ * @author Victor
+ */
 @Controller
 public class ApplicationControllerImp {
 
-//	@Autowired
-//	@Qualifier("sessionRegistry")
-//	private SessionRegistry sessionRegistry;
-//	
+	/*
+	 * Servicio para guardar, editar, borrar y consultar todos los usuarios de la aplicacion
+	 */
 	@Autowired
 	private UserrServiceImp uServ;
 	
+	/**
+	 * Repositorio para guardar, editar, borrar y consultar todas las personas de la aplicacion
+	 */
 	@Autowired
 	private PersonRepository pRep;
 	
+	/**
+	 * Repositorio para guardar, editar, borrar y consultar todos los roles de la aplicacion
+	 */
 	@Autowired
 	private RoleeRepository rRep;
 	
+	/**
+	 * Repositorio para guardar, editar, borrar y consultar todos los personas-rol de la aplicacion
+	 */
 	@Autowired
 	private PersonRoleRepository prolRep;
 	
@@ -67,12 +79,25 @@ public class ApplicationControllerImp {
 		return "login";
 	}
 	
+	/**
+	 * Metodo que muestra la pantalla para el registro de un usuario
+	 * @param model : modelo al que se agregará un nuevo usuario en blanco.
+	 * @return Plantilla para que el usuario pueda agregar valores.
+	 */
 	@GetMapping("/sign-in")
 	public String signIn(Model model) {
 		model.addAttribute("user", new Userr());
 		return "register";
 	}
 
+	/**
+	 * Metodo que recibe el usuario y contraseña suministrados por el usuario. 
+	 * @param user : el objeto usuario que viene en la plantilla con el usuario y contraseña
+	 * @param result : objeto que valida si en los campos del usuario hay alguna irregularidad
+	 * @param model : modelo del que se obtiene el objeto user
+	 * @return Plantilla de inicio de sesion : si no hay errores en los datos ingresados por el usuario
+	 * 			Plantilla de registro : si hay algun error en los datos ingresados por el usuario  
+	 */
 	@PostMapping("/sign-in")
 	public String signIn(@Validated({AddUser.class}) @ModelAttribute("user")Userr user, BindingResult result, 
 			Model model) {
@@ -118,6 +143,11 @@ public class ApplicationControllerImp {
 		return "redirect:/login/";
 	}
 	
+	/**
+	 * Metodo que muestra una pantalla de acceso denegado si el usuario intenta acceder a una pagina a la que no tiene permiso
+	 * @param model : modelo 
+	 * @return : plantilla de acceso denegado
+	 */
 	@GetMapping("/access-denied")
 	public String accesDenied(Model model) {
 		return "denied";
