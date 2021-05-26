@@ -11,10 +11,10 @@ Developed by Victor Mora, Jean Ortiz and Fabian Portilla.
 
 # Datos iniciales para el login.
 
-User: admin12.<br></br>
+User: admin12.
 Password: admin12.
 
-User: regular.<br></br>
+User: regular.
 Password: regular.
 
 # Condiciones para la creación de un usuario.
