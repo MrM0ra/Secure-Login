@@ -7,7 +7,20 @@ Functionalities as login history checking and password change are available for 
 
 Username querys, user deletion and regular user's blank passwords setting are the functionalities for the admin user type.
 
-Developed by Victor Mora, Jean Ortiz and Fabian Portilla
+Developed by Victor Mora, Jean Ortiz and Fabian Portilla.
+
+# Datos iniciales para el login.
+
+User: admin12.
+password: admin12.
+
+User: regular.
+password: regular.
+
+# Condiciones para la creación de un usuario.
+
+1) El nombre de usuario debe tener como minimo 6 caracteres y 20 como máximo.
+2) La contraseña debe tener como minimo 6 caracteres.
 
 # Contact Us:
 
