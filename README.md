@@ -9,7 +9,7 @@ Username querys, user deletion and regular user's blank passwords setting are th
 
 Developed by Victor Mora, Jean Ortiz and Fabian Portilla.
 
-# Datos iniciales para el login.
+# Initial login data
 
 - User: admin12.
 - Password: admin12.
@@ -17,10 +17,10 @@ Developed by Victor Mora, Jean Ortiz and Fabian Portilla.
 - User: regular.
 - Password: regular.
 
-# Condiciones para la creación de un usuario.
+# Conditions for a new user creation.
 
-1) El nombre de usuario debe tener como minimo 6 caracteres y 20 como máximo.
-2) La contraseña debe tener como minimo 6 caracteres.
+1) Username must be at least 6 characters long and at most 20 characters.
+2) Passwords must be at least 6 characters long.
 
 # Contact Us:
 
