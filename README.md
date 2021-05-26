@@ -13,7 +13,7 @@ Developed by Victor Mora, Jean Ortiz and Fabian Portilla.
 
 User: admin12.<br></br>
 Password: admin12.
---------------------------------------------------------------------------------------------------------------------------------------
+
 User: regular.<br></br>
 Password: regular.
 
