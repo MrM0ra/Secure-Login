@@ -10,7 +10,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import cyber.security.proj.model.Person;
 import cyber.security.proj.model.PersonRole;
 import cyber.security.proj.model.PersonRolePK;
@@ -24,6 +24,11 @@ import cyber.security.proj.services.UserrServiceImp;
 @SpringBootApplication
 public class MainApplication implements CommandLineRunner {
 
+	/**
+	 * Hashing SALT for password hashing
+	 */
+	public static final String SALT = BCrypt.gensalt(12);
+	
 	@Autowired
 	private UserrServiceImp uService;
 	
@@ -75,7 +80,8 @@ public class MainApplication implements CommandLineRunner {
 			
 			Userr user1=new Userr();
 			user1.setUserName("admin12");
-			user1.setUserPassword("{noop}admin12");
+			String hashed = BCrypt.hashpw("admin12", SALT);
+			user1.setUserPassword("{bcrypt}"+hashed);
 			user1.setPerson(per1);
 			
 			prolRep.save(pr1);
@@ -113,7 +119,8 @@ public class MainApplication implements CommandLineRunner {
 
 			Userr user2=new Userr();
 			user2.setUserName("regular");
-			user2.setUserPassword("{noop}regular");
+			hashed = BCrypt.hashpw("regular", SALT);
+			user2.setUserPassword("{bcrypt}"+hashed);
 			user2.setPerson(p2);
 			
 			prolRep.save(pr2);
