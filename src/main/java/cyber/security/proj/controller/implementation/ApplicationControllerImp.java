@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import cyber.security.proj.MainApplication;
 import cyber.security.proj.model.Person;
 import cyber.security.proj.model.PersonRole;
 import cyber.security.proj.model.PersonRolePK;
@@ -37,6 +39,11 @@ import cyber.security.proj.services.UserrServiceImp;
 @Controller
 public class ApplicationControllerImp {
 
+	/**
+	 * Hashing SALT for password hashing that is the same as in MainApplication 
+	 */
+	public static final String SALT = MainApplication.SALT;
+	
 	/*
 	 * Servicio para guardar, editar, borrar y consultar todos los usuarios de la aplicación.
 	 */
@@ -126,7 +133,8 @@ public class ApplicationControllerImp {
 			roles.add(pr);
 			
 			user.setPerson(p);
-			user.setUserPassword("{noop}"+user.getUserPassword());
+			String hashed = BCrypt.hashpw(user.getUserPassword(), SALT);
+			user.setUserPassword("{bcrypt}"+hashed);
 			
 			prolRep.save(pr);
 			uServ.saveUserr(user);
@@ -175,7 +183,7 @@ public class ApplicationControllerImp {
 				if(u.isEmpty()) {
 					throw new IllegalArgumentException("Invalid Autotransition Id:" + id);
 				}else {
-					u.get().setUserPassword("{noop} ");
+					u.get().setUserPassword("{bcrypt} ");
 					uServ.editUser(u.get());
 					model.addAttribute("users", uServ.findAll());
 					return "users";
@@ -230,7 +238,7 @@ public class ApplicationControllerImp {
 			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 			String  usrName = auth.getPrincipal().toString().split("; ")[0].split(": ")[2];
 			Userr u = uServ.findByUserName(usrName).get(0);
-			u.setUserPassword("{noop}"+user.getUserPassword());
+			u.setUserPassword("{bcrypt}"+user.getUserPassword());
 			uServ.editUser(u);
 		}
 		return "index";

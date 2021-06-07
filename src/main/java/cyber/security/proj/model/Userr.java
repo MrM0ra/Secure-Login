@@ -26,6 +26,7 @@ public class Userr implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	public interface AddUser{}
+	//Comentario de prieba
 	
 	@Id
 	@SequenceGenerator(name="USERR_USERID_GENERATOR", sequenceName="USERR_SEQ")
