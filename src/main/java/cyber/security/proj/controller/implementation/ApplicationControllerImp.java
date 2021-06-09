@@ -183,7 +183,8 @@ public class ApplicationControllerImp {
 				if(u.isEmpty()) {
 					throw new IllegalArgumentException("Invalid Autotransition Id:" + id);
 				}else {
-					u.get().setUserPassword("{bcrypt} ");
+					String hashed = BCrypt.hashpw(" ", SALT);
+					u.get().setUserPassword("{bcrypt}"+hashed);
 					uServ.editUser(u.get());
 					model.addAttribute("users", uServ.findAll());
 					return "users";
@@ -238,7 +239,8 @@ public class ApplicationControllerImp {
 			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 			String  usrName = auth.getPrincipal().toString().split("; ")[0].split(": ")[2];
 			Userr u = uServ.findByUserName(usrName).get(0);
-			u.setUserPassword("{bcrypt}"+user.getUserPassword());
+			String hashed = BCrypt.hashpw(user.getUserPassword(), SALT);
+			u.setUserPassword("{bcrypt}"+hashed);
 			uServ.editUser(u);
 		}
 		return "index";
