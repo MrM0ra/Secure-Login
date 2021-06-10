@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import cyber.security.proj.MainApplication;
 import cyber.security.proj.model.Person;
@@ -26,7 +27,7 @@ import cyber.security.proj.model.PersonRole;
 import cyber.security.proj.model.PersonRolePK;
 import cyber.security.proj.model.Rolee;
 import cyber.security.proj.model.Userr;
-import cyber.security.proj.model.Userr.AddUser;
+import cyber.security.proj.model.Userr.addNewUser;
 import cyber.security.proj.repositories.PersonRepository;
 import cyber.security.proj.repositories.PersonRoleRepository;
 import cyber.security.proj.repositories.RoleeRepository;
@@ -108,7 +109,7 @@ public class ApplicationControllerImp {
 	 * 			Plantilla de registro : si hay algun error en los datos ingresados por el usuario.
 	 */
 	@PostMapping("/sign-in")
-	public String signIn(@Validated({AddUser.class}) @ModelAttribute("user")Userr user, BindingResult result, Model model) {
+	public String signIn(@Validated({addNewUser.class}) @ModelAttribute("user")Userr user, BindingResult result, Model model) {
 		if(result.hasErrors()) {
 			return "register";
 		}else {
@@ -231,11 +232,11 @@ public class ApplicationControllerImp {
 	}
 	
 	@PostMapping("/pwd-change/")
-	public String pwdChangePost(@Validated({AddUser.class}) @ModelAttribute("user")Userr user, BindingResult result, 
-			Model model) {
+	public String pwdChangePost(@Validated({addNewUser.class}) @ModelAttribute("user")Userr user, BindingResult result, 
+			Model model, @RequestParam(value = "action", required = true) String action) {
 		if(result.hasErrors()) {
 			return "pwd-change";
-		}else {
+		}else if(!action.equals("Cancelar")){
 			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 			String  usrName = auth.getPrincipal().toString().split("; ")[0].split(": ")[2];
 			Userr u = uServ.findByUserName(usrName).get(0);
