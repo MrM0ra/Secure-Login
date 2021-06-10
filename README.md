@@ -17,11 +17,6 @@ Developed by Victor Mora, Jean Ortiz and Fabian Portilla.
 - User: regular.
 - Password: regular.
 
-# Conditions for a new user creation.
-
-1) Username must be at least 6 characters long and at most 20 characters.
-2) Passwords must be at least 6 characters long.
-
 # Contact Us:
 
 Victor Mora: 
