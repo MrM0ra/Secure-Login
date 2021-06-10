@@ -18,32 +18,31 @@
 	<body>
 		<style>	
 			body{
-				padding: 50px;
 				background: #301b3f;
 			}
 			a, td, th, h2, label{
 				color: white;			
 			}
 		</style>
-		<div class="container my-5">
+		<div  style="display: flex; flex-direction:column;width:100vw;height:100vh;justify-content:center;align-items:center;margin-top:-40px">
 			<h2 class="mb-5">Cambio de contraseña</h2>
-			<div clas="row">
-				<div class="col-md-6">
+			<div style="display: flex; flex-direction:column;width:60%; justify-content:center;align-items:center; ">
+				<div >
 					<form action="#" th:action="@{/pwd-change/}" th:object="${user}" method="post">
 						<div class="container my-2" id="wraper">
 							<div class="row" id="left">
-								<div class="form-group col-md-6">
-									<label for="userPassword" class="col-form-label">Nueva contraseña</label>
+								<div class="form-group">
+									<label style="width: 500px;" for="userPassword" class="col-form-label">Nueva contraseña</label>
 									<!-- th:field="*{userPassword}"-->
-									<input type="password" class="form-control" th:name="userPassword" th:id="userPassword" placeholder="Nueva contraseña" />
-									<span th:if="${#fields.hasErrors('userPassword')}" th:errors="*{userPassword}" class="text-danger"></span>
+									<input style="width: 500px;" type="password" class="form-control" th:name="userPassword" th:id="userPassword" placeholder="Nueva contraseña" />
+									<span style="width: 500px;" th:if="${#fields.hasErrors('userPassword')}" th:errors="*{userPassword}" class="text-danger"></span>
 								</div>
 							</div>
-							<div class="row">
-								<div class="col-md-4 mt-3">
+							<div style="width: 500px;" class="row">
+								<div class="">
 									<input type="submit" name="action" class="btn btn-primary" value="Guardar cambios">
 								</div>
-								<div class="col-md-3 mt-3">
+								<div style="margin-left:10px;" class="">
 									<input type="submit" name="action" class="btn btn-secondary" value="Cancelar">
 								</div>
 							</div>	

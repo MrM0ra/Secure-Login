@@ -18,33 +18,32 @@
 	<body>
 		<style>	
 			body{
-				padding: 50px;
 				background: #301b3f;
 			}
 			a, td, th, h2, label{
 				color: white;			
 			}
 		</style>
-		<div class="container my-5">
+		<div style="display: flex; flex-direction:column;width:100vw;height:100vh;justify-content:center;align-items:center;" class="container my-5">
 			<h2 class="mb-5">Inicios de Sesión</h2>
 			<div clas="row">
 				<div class="col-md-6">
-					<form action="#" th:action="@{/}" th:object="${user}" method="post">
+					<form  style="width: 500px;" action="#" th:action="@{/}" th:object="${user}" method="post">
 						<div class="container my-2" id="wraper">
 							<div class="row" id="left">
-								<div class="form-group col-md-6">
-									<h2 class="col-form-label">Señor usuario</h2>
-									<label for="lastLog" class="col-form-label">Su último inicio de sesion fué el dia</label> 
-									<input type="text" th:field="*{lastLog}" class="form-control" id="lastLog" readonly>
+								<div style="width: 500px;" class="form-group col-md-6">
+									<h2 style="width: 500px;" class="col-form-label">Señor usuario</h2>
+									<label style="width: 500px;" for="lastLog" class="col-form-label">Su último inicio de sesion fué el dia</label> 
+									<input style="width: 500px;" type="text" th:field="*{lastLog}" class="form-control" id="lastLog" readonly>
 								</div>
 							</div>
 							<div>
-								<div class="form-group col-md-6">
-									<label for="{lastLastLog" class="col-form-label">Antes de ese solo sbemos que fue el dia</label> 
-									<input type="text" th:field="*{lastLastLog}" class="form-control" id="{lastLastLog" readonly>
+								<div class="form-group ">
+									<label style="width: 500px;" for="{lastLastLog" class="col-form-label">Antes de ese solo sbemos que fue el dia</label> 
+									<input style="width: 500px;" type="text" th:field="*{lastLastLog}" class="form-control" id="{lastLastLog" readonly>
 								</div>
 							</div>
-							<div class="row">
+							<div  style="width: 100%; display:flex; justify-content:center; align-items:center;" class="row">
 								<div class="col-md-4 mt-3">
 									<input type="submit" name="action" class="btn btn-primary" value="Volver">
 								</div>
