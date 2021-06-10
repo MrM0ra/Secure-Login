@@ -36,7 +36,7 @@
 									<!-- th:field="*{userPassword}"-->
 
 									<input style="width: 500px;" type="text" class="form-control" th:name="userPassword" th:id="userPassword" placeholder="Nueva contraseña" />
-									<input style="width: 500px;" type="password" class="form-control" th:name="userPassword" th:id="userPassword" placeholder="Nueva contraseña" />
+	
 									<span style="width: 500px;" th:if="${#fields.hasErrors('userPassword')}" th:errors="*{userPassword}" class="text-danger"></span>
 
 								</div>
