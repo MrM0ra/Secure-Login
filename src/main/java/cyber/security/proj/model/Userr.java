@@ -25,7 +25,7 @@ import javax.validation.constraints.Size;
 public class Userr implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	public interface AddUser{}
+	public interface addNewUser{}
 	//Comentario de prieba
 	
 	@Id
@@ -37,14 +37,14 @@ public class Userr implements Serializable {
 	@Column(name="INST_INST_ID")
 	private BigDecimal instInstId;
 
+	@NotBlank(message="Must not be a blank String", groups= {addNewUser.class})
+	@Size(min=6, message="Most be at least a 6 character long String", groups= {addNewUser.class})
 	@Column(name="USER_NAME")
-	@NotBlank(message="Must not be a blank String", groups= {AddUser.class})
-	@Size(min=6, max=20, groups=AddUser.class)
 	private String userName;
 
+	@NotBlank(message="Must not be a blank String", groups= {addNewUser.class})
+	@Size(min=6, message="Most be at least a 6 character long String", groups= {addNewUser.class})
 	@Column(name="USER_PASSWORD")
-	@NotBlank(message="Must not be a blank String", groups= {AddUser.class})
-	@Size(min=6, max=12, groups=AddUser.class)
 	private String userPassword;
 
 	//bi-directional many-to-one association to Person

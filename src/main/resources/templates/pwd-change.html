@@ -33,8 +33,9 @@
 						<div class="container my-2" id="wraper">
 							<div class="row" id="left">
 								<div class="form-group col-md-6">
-									<label for="userPassword" class="col-form-label">Nueva contraseña</label> 
-									<input type="text" th:field="*{userPassword}" class="form-control" id="userPassword" placeholder="Nueva contraseña">
+									<label for="userPassword" class="col-form-label">Nueva contraseña</label>
+									<!-- th:field="*{userPassword}"-->
+									<input type="text" class="form-control" th:name="userPassword" th:id="userPassword" placeholder="Nueva contraseña" />
 									<span th:if="${#fields.hasErrors('userPassword')}" th:errors="*{userPassword}" class="text-danger"></span>
 								</div>
 							</div>
