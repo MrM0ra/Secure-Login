@@ -36,6 +36,7 @@
 									<label for="userPassword" class="col-form-label">Nueva contraseña</label>
 									<!-- th:field="*{userPassword}"-->
 									<input type="text" class="form-control" th:name="userPassword" th:id="userPassword" placeholder="Nueva contraseña" />
+									<input type="password" class="form-control" th:name="userPassword" th:id="userPassword" placeholder="Nueva contraseña" />
 									<span th:if="${#fields.hasErrors('userPassword')}" th:errors="*{userPassword}" class="text-danger"></span>
 								</div>
 							</div>
